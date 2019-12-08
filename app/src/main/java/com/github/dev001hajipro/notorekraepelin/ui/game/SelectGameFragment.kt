@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.dev001hajipro.notorekraepelin.R
@@ -26,9 +27,8 @@ class SelectGameFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    // TODO("後でby viewModels()での初期化を試す。")
-    private lateinit var viewModel: SelectGameViewModel
 
+    private val viewModel: SelectGameViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,6 @@ class SelectGameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(SelectGameViewModel::class.java)
         val binding = DataBindingUtil.inflate<FragmentSelectGameBinding>(
             inflater,
             R.layout.fragment_select_game,
@@ -60,7 +59,7 @@ class SelectGameFragment : Fragment() {
             ArrayAdapter<String>(
                 requireContext(),
                 R.layout.dropdown_menu_popup_item,
-                arrayOf("10", "60", "ccc")
+                arrayOf("10", "60", "60*5", "60*15","60*15*2")
             )
         )
 
