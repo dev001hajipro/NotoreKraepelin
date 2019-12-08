@@ -40,4 +40,35 @@
         android:name="com.github.dev001hajipro.notorekraepelin.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+    <fragment
+        android:id="@+id/nav_select_game"
+        android:name="com.github.dev001hajipro.notorekraepelin.ui.game.SelectGameFragment"
+        android:label="fragment_select_game"
+        tools:layout="@layout/fragment_select_game" >
+        <action
+            android:id="@+id/action_nav_select_game_to_nav_game"
+            app:destination="@id/nav_game" >
+            <argument android:defaultValue="60"
+                android:name="seconds" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_game"
+        android:name="com.github.dev001hajipro.notorekraepelin.ui.game.GameFragment"
+        android:label="fragment_game"
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_nav_game_to_nav_game_result"
+            app:destination="@id/nav_game_result">
+        </action>
+        <argument
+            android:name="seconds"
+            app:argType="integer"
+            android:defaultValue="60" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_game_result"
+        android:name="com.github.dev001hajipro.notorekraepelin.ui.game.GameResultFragment"
+        android:label="fragment_game_result"
+        tools:layout="@layout/fragment_game_result" />
 </navigation>
