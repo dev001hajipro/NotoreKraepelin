@@ -42,14 +42,14 @@ class SelectGameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentSelectGameBinding>(
+        val binding = FragmentSelectGameBinding.inflate(
             inflater,
-            R.layout.fragment_select_game,
             container,
             false
-        )
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        ).also {
+            it.lifecycleOwner = this
+            it.viewModel = this.viewModel
+        }
         return binding.root
     }
 
@@ -59,13 +59,17 @@ class SelectGameFragment : Fragment() {
             ArrayAdapter<String>(
                 requireContext(),
                 R.layout.dropdown_menu_popup_item,
-                arrayOf("10", "60", "60*5", "60*15","60*15*2")
+                arrayOf("10", "60", "300", "600","900", "1800")
             )
         )
+        // TODO("secondsの値をリセットすれば、AutoCompleteTextViewの候補リストが表示されるが、viewModel.resetやviewModel.initにしたほうが良い。")
+        viewModel.seconds.value = ""
 
         start_game.setOnClickListener {
             Log.d("DEBUG_B", "viewModel.seconds = ${viewModel.seconds}")
-            findNavController().navigate(SelectGameFragmentDirections.actionNavSelectGameToNavGame())
+            // TODO("i want auto cast from String to Int. adapter, converter?")
+            val s = viewModel.seconds.value?.toInt() ?: 444
+            findNavController().navigate(SelectGameFragmentDirections.actionNavSelectGameToNavGame(s))
         }
     }
 
