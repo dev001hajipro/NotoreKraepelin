@@ -17,18 +17,16 @@ class GameFragment : Fragment() {
 
     private val args: GameFragmentArgs by navArgs()
 
+    private val viewModel: GameViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    private val viewModel: GameViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         val binding = FragmentGameBinding.inflate(
             inflater, container, false
         ).also {
