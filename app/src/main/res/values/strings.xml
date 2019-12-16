@@ -33,4 +33,21 @@
     <string name="underscore">_</string>
     <string name="nbsp">\u00A0</string>
 
+    <string name="title">クレペる</string>
+    <string name="grades">成績</string>
+    <string name="return_to_title">タイトルへ戻る</string>
+    <string name="once_more">もう一回</string>
+    <string name="grades_label">判定</string>
+    <string name="grades_a">A</string>
+    <string name="grades_b">B</string>
+    <string name="grades_c">C</string>
+    <string name="grades_d">D</string>
+    <string name="grades_a_plus">A+</string>
+    <string name="test_count">テスト回数</string>
+    <string name="number_of_responses">回答数</string>
+    <string name="miss_count">ミスした回数</string>
+    <string name="start_test">テスト開始</string>
+    <string name="fragment_game">クレペリン・ゲーム</string>
+    <string name="fragment_game_result">結果</string>
+    <string name="fragment_select_game">ゲーム選択</string>
 </resources>
