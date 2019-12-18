@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.github.dev001hajipro.notorekraepelin.Kraepelin
+import com.github.dev001hajipro.notorekraepelin.SingleLiveEvent
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -29,25 +30,28 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     var lineCount = 0
 
     // UI側から変更なし
-    var maxSecond = 60
+    var maxSecond = MutableLiveData(0)
+
+    var navigateToGameResultEvent = SingleLiveEvent<Any>()
 
     private val runnable = object : Runnable {
         override fun run() {
             currentSecond++
             // TODO("need observe")
-            //textViewTimer.text = "残り${maxSecond - currentSecond}秒"
+            timerText.value = "残り${maxSecond.value?.minus(currentSecond) ?: 0}秒"
 
             if (currentSecond % 60 == 0) {
                 cursorIndex = 0
                 lineCount++
             }
 
-            if (currentSecond < maxSecond) {
-                handler.postDelayed(this, 1000)
-            } else { // time over
-                handler.removeCallbacks(this)
-                //TODO("goto the GameResultFragment."
-                //startActivity(Intent(application, ResultActivity::class.java))
+            maxSecond.value?.let {
+                if (currentSecond < it) {
+                    handler.postDelayed(this, 1000)
+                } else {
+                    //TODO("goto the GameResultFragment.")
+                    navigateToGameResultEvent.setValue(Any())
+                }
             }
         }
     }
@@ -77,7 +81,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         //maxSecond = intent.getIntExtra("KEY_TIMER_SECONDS", 1)
 
         // TODO("need binding")
-        timerText.value = "残り${maxSecond - currentSecond}秒"
+
+        timerText.value = "残り${maxSecond.value?.minus(currentSecond) ?: 0}秒"
 // TODO("need binding")
         //textQ1.text = "${lines[lineCount][cursorIndex + 0]}"
         //textQ2.text = "${lines[lineCount][cursorIndex + 1]}"
@@ -93,6 +98,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         Log.d("DEBUG_X", "onClickNumberPad = $number")
         // show input number
         // TODO("delete ui code")
+
         /*
         val b = v as Button
         var inputNumber = Integer.parseInt(b.tag.toString())

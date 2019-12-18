@@ -59,8 +59,8 @@
         tools:layout="@layout/fragment_game" >
         <action
             android:id="@+id/action_nav_game_to_nav_game_result"
-            app:destination="@id/nav_game_result">
-        </action>
+            app:destination="@id/nav_game_result"
+            app:popUpTo="@+id/nav_select_game" />
         <argument
             android:name="seconds"
             app:argType="integer"
@@ -70,5 +70,9 @@
         android:id="@+id/nav_game_result"
         android:name="com.github.dev001hajipro.notorekraepelin.ui.game.GameResultFragment"
         android:label="@string/fragment_game_result"
-        tools:layout="@layout/fragment_game_result" />
+        tools:layout="@layout/fragment_game_result" >
+        <action
+            android:id="@+id/action_nav_game_result_to_nav_select_game"
+            app:popUpTo="@+id/nav_select_game" />
+    </fragment>
 </navigation>
