@@ -50,4 +50,6 @@
     <string name="fragment_game">クレペリン・ゲーム</string>
     <string name="fragment_game_result">結果</string>
     <string name="fragment_select_game">ゲーム選択</string>
+
+    <string name="seconds_remaining">残り%d秒</string>
 </resources>

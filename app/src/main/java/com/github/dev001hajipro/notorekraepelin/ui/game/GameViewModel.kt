@@ -15,7 +15,7 @@ import com.github.dev001hajipro.notorekraepelin.SingleLiveEvent
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     val handler = Handler()
-    var timerText = MutableLiveData<String>("0")
+    var timerText = MutableLiveData(0)
 
     // UI側から変更なし
     var currentSecond = 0
@@ -38,7 +38,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         override fun run() {
             currentSecond++
             // TODO("need observe")
-            timerText.value = "残り${maxSecond.value?.minus(currentSecond) ?: 0}秒"
+            timerText.value = maxSecond.value?.minus(currentSecond) ?: 0
 
             if (currentSecond % 60 == 0) {
                 cursorIndex = 0
@@ -82,7 +82,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
         // TODO("need binding")
 
-        timerText.value = "残り${maxSecond.value?.minus(currentSecond) ?: 0}秒"
+        timerText.value = maxSecond.value?.minus(currentSecond) ?: 0
 // TODO("need binding")
         //textQ1.text = "${lines[lineCount][cursorIndex + 0]}"
         //textQ2.text = "${lines[lineCount][cursorIndex + 1]}"
