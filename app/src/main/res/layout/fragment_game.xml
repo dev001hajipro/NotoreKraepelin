@@ -212,7 +212,9 @@
             app:layout_constraintEnd_toStartOf="@+id/textA3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textA1"
-            app:layout_constraintTop_toBottomOf="@+id/textQ1" />
+            app:layout_constraintTop_toBottomOf="@+id/textQ1"
+            android:visibility="invisible"
+            />
 
         <TextView
             android:id="@+id/textA3"
@@ -225,7 +227,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textA2"
-            app:layout_constraintTop_toBottomOf="@+id/textQ1" />
+            app:layout_constraintTop_toBottomOf="@+id/textQ1"
+            android:visibility="invisible"
+            />
 
         <TextView
             android:id="@+id/textViewTimer"
