@@ -10,12 +10,19 @@ import com.github.dev001hajipro.notorekraepelin.SingleLiveEvent
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
-    val handler = Handler()
-    var remainingSeconds = MutableLiveData(0)
+    private val handler = Handler()
 
+    // 残り時間 = 制限時間 - 経過時間
+    val remainingSeconds = MutableLiveData(0)
+    fun calcRemainingSeconds() {
+        remainingSeconds.value = maxSecond.value?.minus(elapsedSeconds.value ?: 0) ?: 0
+    }
     // UI側から変更なし
-    var currentSecond = 0
-    var cursorIndex = 0
+    var maxSecond = MutableLiveData(0)
+    // UI側から変更なし
+    // 経過時間
+    var elapsedSeconds = MutableLiveData(0)
+
 
     var q1 = MutableLiveData(0)
     var q2 = MutableLiveData(0)
@@ -23,6 +30,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     var a2 = MutableLiveData(0)
     var a3 = MutableLiveData(0)
 
+
+    var cursorIndex = 0
     // UI側から変更なし
     var lines = MutableList(15) { Kraepelin.geneList115() }
     // UI側から変更なし
@@ -32,24 +41,21 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     // UI側から変更なし
     var lineCount = 0
 
-    // UI側から変更なし
-    var maxSecond = MutableLiveData(0)
-
     var navigateToGameResultEvent = SingleLiveEvent<Any>()
 
     private val runnable = object : Runnable {
         override fun run() {
-            currentSecond++
-            // TODO("need observe")
-            remainingSeconds.value = maxSecond.value?.minus(currentSecond) ?: 0
+            elapsedSeconds.value = (elapsedSeconds.value ?: 0) + 1
+            val v = elapsedSeconds.value ?: 0
+            calcRemainingSeconds()
 
-            if (currentSecond % 60 == 0) {
+            if (v % 60 == 0) { // イベント
                 cursorIndex = 0
                 lineCount++
             }
 
             maxSecond.value?.let {
-                if (currentSecond < it) {
+                if ((elapsedSeconds.value ?: 0) < it) {
                     handler.postDelayed(this, 1000)
                 } else {
                     navigateToGameResultEvent.setValue(Any())
@@ -74,11 +80,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     fun start() {
         Log.d("onStart", "onStart")
 
-        currentSecond = 0
+        elapsedSeconds.value = 0
+        calcRemainingSeconds()
         cursorIndex = 0
         lineCount = 0
-
-        remainingSeconds.value = maxSecond.value?.minus(currentSecond) ?: 0
 
         q1.value = lines[lineCount][cursorIndex + 0]
         q2.value = lines[lineCount][cursorIndex + 1]
@@ -89,8 +94,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onClickNumberPad(number: Int) {
         Log.d("DEBUG_X", "onClickNumberPad = $number")
-
-        a1.value = number
+        // TODO とりあえず、一つだけ表示。最終的にはリストで表示して、アニメーションしたい
+        a2.value = number
         val answer = lines[lineCount][cursorIndex + 0] + lines[lineCount][cursorIndex + 1] % 10
         // todo("setTextColor")
         if (answer == number) {
