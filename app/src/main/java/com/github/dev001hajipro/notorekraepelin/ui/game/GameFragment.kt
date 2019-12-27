@@ -21,10 +21,6 @@ class GameFragment : Fragment() {
 
     private val viewModel: GameViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,15 +39,20 @@ class GameFragment : Fragment() {
         return binding.root
     }
 
+    override fun onPause() {
+        super.onPause()
+        viewModel.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onResume()
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.maxSecond.value = args.seconds
         Log.d("DEBUG_X", "args.seconds=${args.seconds}")
         viewModel.start()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("DEBUG_X", "onStart")
     }
 }

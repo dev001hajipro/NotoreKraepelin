@@ -10,6 +10,8 @@ import com.github.dev001hajipro.notorekraepelin.SingleLiveEvent
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
+    val tag = GameViewModel::class.java.simpleName
+
     private val handler = Handler()
 
     // 残り時間 = 制限時間 - 経過時間
@@ -29,7 +31,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     var a1 = MutableLiveData(0)
     var a2 = MutableLiveData(0)
     var a3 = MutableLiveData(0)
-
 
     var cursorIndex = 0
     // UI側から変更なし
@@ -56,6 +57,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
             maxSecond.value?.let {
                 if ((elapsedSeconds.value ?: 0) < it) {
+                    Log.d(tag, "before postDelayed delayMilis=1000, ${elapsedSeconds.value}")
                     handler.postDelayed(this, 1000)
                 } else {
                     navigateToGameResultEvent.setValue(Any())
@@ -64,12 +66,13 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun startTimer() {
+    fun onResume() {
         // start timer.
+        Log.d(tag, "before postDelayed delayMilis=1000, ${elapsedSeconds.value}")
         handler.postDelayed(runnable, 1000)
     }
 
-    fun stopTimer() {
+    fun onPause() {
         handler.removeCallbacks(runnable)
     }
 
