@@ -44,8 +44,8 @@
     <string name="grades_d">D</string>
     <string name="grades_a_plus">A+</string>
     <string name="test_count">テスト回数</string>
-    <string name="number_of_responses">回答数</string>
-    <string name="miss_count">ミスした回数</string>
+    <string name="number_of_correct_answers">正解数</string>
+    <string name="number_of_incorrect_answers">不正解数</string>
     <string name="start_test">テスト開始</string>
     <string name="fragment_game">クレペリン・ゲーム</string>
     <string name="fragment_game_result">結果</string>

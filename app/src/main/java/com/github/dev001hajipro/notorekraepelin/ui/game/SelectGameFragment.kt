@@ -44,16 +44,15 @@ class SelectGameFragment : Fragment() {
             ArrayAdapter<String>(
                 requireContext(),
                 R.layout.dropdown_menu_popup_item,
-                arrayOf("10", "60", "300", "600", "900", "1800")
+                arrayOf("10", "60", "300", "600", "900", "1800") // TODO key-value方式にして、表示は、10秒、1分、3分...のようにする。
             )
         )
-        // TODO("secondsの値をリセットすれば、AutoCompleteTextViewの候補リストが表示されるが、viewModel.resetやviewModel.initにしたほうが良い。")
+        // TODO secondsの値をリセットすれば、AutoCompleteTextViewの候補リストが表示されるが、viewModel.resetやviewModel.initにしたほうが良い。
         viewModel.seconds.value = ""
 
         start_game.setOnClickListener {
             Log.d("DEBUG_B", "viewModel.seconds = ${viewModel.seconds}")
-            // TODO("i want auto cast from String to Int. adapter, converter?")
-            val s = viewModel.seconds.value?.toInt() ?: 444
+            val s = viewModel.seconds.value?.toInt() ?: 444 // TODO toIntをコードで書きたくない。adapter, converter?
             findNavController().navigate(SelectGameFragmentDirections.actionNavSelectGameToNavGame(s))
         }
     }

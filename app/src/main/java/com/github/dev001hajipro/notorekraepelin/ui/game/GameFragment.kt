@@ -22,7 +22,8 @@ class GameFragment : Fragment() {
     private val viewModel: GameViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentGameBinding.inflate(
@@ -52,7 +53,7 @@ class GameFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.maxSecond.value = args.seconds
-        Log.d("DEBUG_X", "args.seconds=${args.seconds}")
+        Log.d(this::class.java.simpleName, "args.seconds=${args.seconds}")
         viewModel.start()
     }
 }

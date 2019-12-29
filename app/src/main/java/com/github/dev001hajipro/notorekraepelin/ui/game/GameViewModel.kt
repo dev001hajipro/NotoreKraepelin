@@ -57,7 +57,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
             maxSecond.value?.let {
                 if ((elapsedSeconds.value ?: 0) < it) {
-                    Log.d(tag, "before postDelayed delayMilis=1000, ${elapsedSeconds.value}")
+                    Log.d(tag, "before postDelayed delayMillis=1000, ${elapsedSeconds.value}")
                     handler.postDelayed(this, 1000)
                 } else {
                     navigateToGameResultEvent.setValue(Any())
@@ -68,7 +68,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onResume() {
         // start timer.
-        Log.d(tag, "before postDelayed delayMilis=1000, ${elapsedSeconds.value}")
+        Log.d(tag, "before postDelayed delayMillis=1000, ${elapsedSeconds.value}")
         handler.postDelayed(runnable, 1000)
     }
 
@@ -100,7 +100,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         // TODO とりあえず、一つだけ表示。最終的にはリストで表示して、アニメーションしたい
         a2.value = number
         val answer = lines[lineCount][cursorIndex + 0] + lines[lineCount][cursorIndex + 1] % 10
-        // todo("setTextColor")
+        // TODO setTextColor
         if (answer == number) {
             scores[lineCount]++
         } else {
