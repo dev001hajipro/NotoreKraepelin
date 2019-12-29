@@ -34,15 +34,17 @@ class GameFragment : Fragment() {
         }
 
         viewModel.navigateToGameResultEvent.observe(this.viewLifecycleOwner, Observer {
-            findNavController().navigate(GameFragmentDirections.actionNavGameToNavGameResult())
+            findNavController().navigate(GameFragmentDirections.actionNavGameToNavGameResult(50, 50))
         })
 
         return binding.root
     }
 
-    override fun onPause() {
-        super.onPause()
-        viewModel.onPause()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.maxSecond.value = args.seconds
+        Log.d(this::class.java.simpleName, "args.seconds=${args.seconds}")
+        viewModel.init()
     }
 
     override fun onResume() {
@@ -50,10 +52,8 @@ class GameFragment : Fragment() {
         viewModel.onResume()
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel.maxSecond.value = args.seconds
-        Log.d(this::class.java.simpleName, "args.seconds=${args.seconds}")
-        viewModel.start()
+    override fun onPause() {
+        super.onPause()
+        viewModel.onPause()
     }
 }

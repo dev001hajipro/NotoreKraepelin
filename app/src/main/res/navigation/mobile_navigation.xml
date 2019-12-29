@@ -74,5 +74,13 @@
         <action
             android:id="@+id/action_nav_game_result_to_nav_select_game"
             app:popUpTo="@+id/nav_select_game" />
+        <argument
+            android:name="correctAnswers"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="incorrectAnswers"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

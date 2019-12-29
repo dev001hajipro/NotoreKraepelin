@@ -66,6 +66,18 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun init() {
+        Log.d("onStart", "onStart")
+
+        elapsedSeconds.value = 0
+        calcRemainingSeconds()
+        cursorIndex = 0
+        lineCount = 0
+
+        q1.value = lines[lineCount][cursorIndex + 0]
+        q2.value = lines[lineCount][cursorIndex + 1]
+    }
+
     fun onResume() {
         // start timer.
         Log.d(tag, "before postDelayed delayMillis=1000, ${elapsedSeconds.value}")
@@ -78,21 +90,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onClickCancel() {
 
-    }
-
-    fun start() {
-        Log.d("onStart", "onStart")
-
-        elapsedSeconds.value = 0
-        calcRemainingSeconds()
-        cursorIndex = 0
-        lineCount = 0
-
-        q1.value = lines[lineCount][cursorIndex + 0]
-        q2.value = lines[lineCount][cursorIndex + 1]
-
-        // start timer.
-        handler.postDelayed(runnable, 1000)
     }
 
     fun onClickNumberPad(number: Int) {

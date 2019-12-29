@@ -17,12 +17,8 @@ import kotlinx.android.synthetic.main.fragment_game_result.*
  * １ゲーム終わったときの結果画面用フラグメント.
  */
 class GameResultFragment : Fragment() {
-    private val args: GameFragmentArgs by navArgs()
+    private val args: GameResultFragmentArgs by navArgs()
     private val viewModel: GameResultViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +28,6 @@ class GameResultFragment : Fragment() {
             it.lifecycleOwner = this
             it.viewModel = this.viewModel
         }
-
         return binding.root
     }
 
@@ -42,4 +37,12 @@ class GameResultFragment : Fragment() {
             findNavController().navigate(GameResultFragmentDirections.actionNavGameResultToNavSelectGame())
         }
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.numberOfCorrectAnswers.value = args.correctAnswers
+        viewModel.numberOfIncorrectAnswers.value = args.incorrectAnswers
+    }
+
+
 }
