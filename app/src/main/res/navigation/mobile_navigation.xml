@@ -6,41 +6,6 @@
     app:startDestination="@+id/nav_select_game">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
-
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
-    <fragment
         android:id="@+id/nav_select_game"
         android:name="com.github.dev001hajipro.notorekraepelin.ui.game.SelectGameFragment"
         android:label="@string/fragment_select_game"
@@ -83,4 +48,11 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="com.github.dev001hajipro.notorekraepelin.ui.tools.ToolsFragment"
+        android:label="@string/menu_tools"
+        tools:layout="@layout/fragment_tools" />
+
 </navigation>

@@ -4,28 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.github.dev001hajipro.notorekraepelin.R
+import androidx.fragment.app.viewModels
+import com.github.dev001hajipro.notorekraepelin.databinding.FragmentToolsBinding
 
 class ToolsFragment : Fragment() {
 
-    private lateinit var toolsViewModel: ToolsViewModel
+    private val viewModel: ToolsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        toolsViewModel =
-            ViewModelProviders.of(this).get(ToolsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_tools, container, false)
-        val textView: TextView = root.findViewById(R.id.text_tools)
-        toolsViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
-        return root
+        return FragmentToolsBinding.inflate(inflater, container, false).also {
+            it.lifecycleOwner = this
+            it.viewModel = viewModel
+        }.root
     }
 }
