@@ -5,5 +5,5 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 
 class SelectGameViewModel(application: Application) : AndroidViewModel(application) {
-    var seconds = MutableLiveData<String>("")
+    var seconds = MutableLiveData("10")
 }

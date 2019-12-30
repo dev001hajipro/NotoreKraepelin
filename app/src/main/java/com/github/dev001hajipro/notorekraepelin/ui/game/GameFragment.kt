@@ -34,7 +34,7 @@ class GameFragment : Fragment() {
         }
 
         viewModel.navigateToGameResultEvent.observe(this.viewLifecycleOwner, Observer {
-            findNavController().navigate(GameFragmentDirections.actionNavGameToNavGameResult(50, 50))
+            findNavController().navigate(GameFragmentDirections.actionNavGameToNavGameResult(viewModel.sumScore(), viewModel.sumMiss()))
         })
 
         return binding.root

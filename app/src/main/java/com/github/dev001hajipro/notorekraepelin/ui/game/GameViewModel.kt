@@ -25,7 +25,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     // 経過時間
     var elapsedSeconds = MutableLiveData(0)
 
-
     var q1 = MutableLiveData(0)
     var q2 = MutableLiveData(0)
     var a1 = MutableLiveData(0)
@@ -36,9 +35,16 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     // UI側から変更なし
     var lines = MutableList(15) { Kraepelin.geneList115() }
     // UI側から変更なし
+    // 一行ごとの正解数
     var scores = MutableList(15) { 0 }
-    //
+
+    fun sumScore() = scores.sum()
+
+    // 一行ごとの不正解数
     var misses = MutableList(15) { 0 }
+
+    fun sumMiss() = misses.sum()
+
     // UI側から変更なし
     var lineCount = 0
 
@@ -67,27 +73,28 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun init() {
-        Log.d("onStart", "onStart")
+        Log.d(tag, "init")
 
         elapsedSeconds.value = 0
         calcRemainingSeconds()
-        cursorIndex = 0
         lineCount = 0
 
+        cursorIndex = 0
         q1.value = lines[lineCount][cursorIndex + 0]
         q2.value = lines[lineCount][cursorIndex + 1]
     }
 
     fun onResume() {
-        // start timer.
         Log.d(tag, "before postDelayed delayMillis=1000, ${elapsedSeconds.value}")
-        handler.postDelayed(runnable, 1000)
+        handler.postDelayed(runnable, 1000) // start timer.
     }
 
     fun onPause() {
         handler.removeCallbacks(runnable)
     }
 
+    // TODO クリアボタンで、１つ前の問題に戻る対応。
+    // 行の最初の場合は、戻れない仕様。
     fun onClickCancel() {
 
     }
@@ -96,7 +103,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         Log.d("DEBUG_X", "onClickNumberPad = $number")
         // TODO とりあえず、一つだけ表示。最終的にはリストで表示して、アニメーションしたい
         a2.value = number
-        val answer = lines[lineCount][cursorIndex + 0] + lines[lineCount][cursorIndex + 1] % 10
+        val answer = (lines[lineCount][cursorIndex + 0] + lines[lineCount][cursorIndex + 1]) % 10
         // TODO setTextColor
         if (answer == number) {
             scores[lineCount]++
