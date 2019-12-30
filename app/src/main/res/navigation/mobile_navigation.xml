@@ -3,25 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_select_game">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/nav_select_game"
+        android:name="com.github.dev001hajipro.notorekraepelin.ui.game.SelectGameFragment"
+        android:label="@string/fragment_select_game"
+        tools:layout="@layout/fragment_select_game" >
+        <action
+            android:id="@+id/action_nav_select_game_to_nav_game"
+            app:destination="@id/nav_game" >
+            <argument android:defaultValue="60"
+                android:name="seconds" />
+        </action>
+    </fragment>
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/nav_game"
+        android:name="com.github.dev001hajipro.notorekraepelin.ui.game.GameFragment"
+        android:label="@string/fragment_game"
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_nav_game_to_nav_game_result"
+            app:destination="@id/nav_game_result"
+            app:popUpTo="@+id/nav_select_game" />
+        <argument
+            android:name="seconds"
+            app:argType="integer"
+            android:defaultValue="60" />
+    </fragment>
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_game_result"
+        android:name="com.github.dev001hajipro.notorekraepelin.ui.game.GameResultFragment"
+        android:label="@string/fragment_game_result"
+        tools:layout="@layout/fragment_game_result" >
+        <action
+            android:id="@+id/action_nav_game_result_to_nav_select_game"
+            app:popUpTo="@+id/nav_select_game" />
+        <argument
+            android:name="correctAnswers"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="incorrectAnswers"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_tools"
@@ -29,15 +55,4 @@
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
 
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="com.github.dev001hajipro.notorekraepelin.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
 </navigation>
