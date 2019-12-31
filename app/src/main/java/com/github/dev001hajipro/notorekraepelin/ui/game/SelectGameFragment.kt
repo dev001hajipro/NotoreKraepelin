@@ -44,20 +44,26 @@ class SelectGameFragment : Fragment() {
                 requireContext(),
                 R.layout.dropdown_menu_popup_item,
                 arrayOf(
-                    "10",
-                    "60",
-                    "300",
-                    "600",
-                    "900",
-                    "1800"
-                ) // TODO key-value方式にして、表示は、10秒、1分、3分...のようにする。
+                    getString(R.string.seconds_10),
+                    getString(R.string.minutes_1),
+                    getString(R.string.minutes_2),
+                    getString(R.string.minutes_3),
+                    getString(R.string.minutes_5),
+                    getString(R.string.minutes_8),
+                    getString(R.string.minutes_10),
+                    getString(R.string.minutes_15)
+                )
             )
         )
 
         start_game.setOnClickListener {
             Log.d(_tag, "viewModel.seconds = ${viewModel.seconds}")
-            val s = viewModel.seconds.value?.toInt() ?: 10
-            findNavController().navigate(SelectGameFragmentDirections.actionNavSelectGameToNavGame(s))
+            val sec = viewModel.seconds.value ?: 10
+            findNavController().navigate(
+                SelectGameFragmentDirections.actionNavSelectGameToNavGame(
+                    sec
+                )
+            )
         }
     }
 }

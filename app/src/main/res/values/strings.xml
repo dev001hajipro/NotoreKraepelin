@@ -15,7 +15,7 @@
     <string name="menu_send">Send</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hint_seconds">ゲーム時間を入力してください。</string>
+    <string name="hint_seconds">ここをタップしてゲーム時間が選べます</string>
     <string name="app_title">脳トレ クレペリン</string>
     <string name="start_game">ゲーム開始！</string>
     <string name="communicate">コミュニケーション</string>
@@ -53,4 +53,13 @@
 
     <string name="seconds_remaining">残り%d秒</string>
     <string name="others">その他</string>
+    <string name="seconds_10">10秒</string>
+
+    <string name="minutes_1">1分</string>
+    <string name="minutes_2">2分</string>
+    <string name="minutes_3">3分</string>
+    <string name="minutes_5">5分</string>
+    <string name="minutes_8">8分</string>
+    <string name="minutes_10">10分</string>
+    <string name="minutes_15">15分</string>
 </resources>
