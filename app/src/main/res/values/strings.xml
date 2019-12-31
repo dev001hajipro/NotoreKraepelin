@@ -2,8 +2,8 @@
     <string name="app_name">NotoreKraepelin</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">脳トレ・クレペリン</string>
+    <string name="nav_header_subtitle">dev001hajipro@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -52,4 +52,5 @@
     <string name="fragment_select_game">ゲーム選択</string>
 
     <string name="seconds_remaining">残り%d秒</string>
+    <string name="others">その他</string>
 </resources>
