@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="com.github.dev001hajipro.notorekraepelin.utils.Converter" />
         <variable
             name="viewModel"
             type="com.github.dev001hajipro.notorekraepelin.ui.game.SelectGameViewModel" />
@@ -45,7 +47,7 @@
                 android:id="@+id/filled_exposed_dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.seconds}"
+                android:text="@={Converter.INSTANCE.timeToName(context, viewModel.seconds)}"
                 android:focusable="false"
                 android:cursorVisible="false"
                 />
