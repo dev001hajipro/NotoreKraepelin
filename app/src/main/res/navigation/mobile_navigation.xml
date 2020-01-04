@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_select_game">
+    app:startDestination="@id/nav_anime">
 
     <fragment
         android:id="@+id/nav_select_game"
         android:name="com.github.dev001hajipro.notorekraepelin.ui.game.SelectGameFragment"
-        android:label="@string/fragment_select_game"
-        tools:layout="@layout/fragment_select_game" >
+        android:label="@string/fragment_select_game">
         <action
             android:id="@+id/action_nav_select_game_to_nav_game"
-            app:destination="@id/nav_game" >
-            <argument android:defaultValue="60"
-                android:name="seconds" />
+            app:destination="@id/nav_game">
+            <argument
+                android:name="seconds"
+                android:defaultValue="60" />
         </action>
     </fragment>
     <fragment
@@ -54,5 +54,10 @@
         android:name="com.github.dev001hajipro.notorekraepelin.ui.tools.ToolsFragment"
         android:label="@string/menu_tools"
         tools:layout="@layout/fragment_tools" />
+    <fragment
+        android:id="@+id/nav_anime"
+        android:name="com.github.dev001hajipro.notorekraepelin.ui.anime.AnimeFragment"
+        android:label="fragment_anime"
+        tools:layout="@layout/fragment_anime" />
 
 </navigation>
