@@ -10,7 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.vectordrawable.graphics.drawable.AnimatorInflaterCompat
+import com.github.dev001hajipro.notorekraepelin.R
 import com.github.dev001hajipro.notorekraepelin.databinding.FragmentGameBinding
+import kotlinx.android.synthetic.main.fragment_game.*
 
 /**
  * ゲーム画面用フラグメント.
@@ -34,7 +37,40 @@ class GameFragment : Fragment() {
         }
 
         viewModel.navigateToGameResultEvent.observe(this.viewLifecycleOwner, Observer {
-            findNavController().navigate(GameFragmentDirections.actionNavGameToNavGameResult(viewModel.sumScore(), viewModel.sumMiss()))
+            findNavController().navigate(
+                GameFragmentDirections.actionNavGameToNavGameResult(
+                    viewModel.sumScore(),
+                    viewModel.sumMiss()
+                )
+            )
+        })
+
+        viewModel.a2.observe(this.viewLifecycleOwner, Observer {
+            arrayOf(textA2).forEach {
+                AnimatorInflaterCompat.loadAnimator(
+                    this@GameFragment.context,
+                    R.animator.answer_number
+                ).apply {
+                    setTarget(it)
+                }.start()
+            }
+        })
+
+        viewModel.q1.observe(this.viewLifecycleOwner, Observer {
+            arrayOf(textQ1, textQ2).forEach {
+                AnimatorInflaterCompat.loadAnimator(
+                    this@GameFragment.context,
+                    R.animator.hide_numbers
+                ).apply {
+                    setTarget(it)
+                }.start()
+                AnimatorInflaterCompat.loadAnimator(
+                    this@GameFragment.context,
+                    R.animator.show_numbers
+                ).apply {
+                    setTarget(it)
+                }.start()
+            }
         })
 
         return binding.root

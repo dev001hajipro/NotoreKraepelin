@@ -5,8 +5,8 @@
         <objectAnimator
             android:propertyName="textSize"
             android:duration="250"
-            android:valueFrom="24"
-            android:valueTo="48"
+            android:valueFrom="84"
+            android:valueTo="72"
             android:valueType="floatType" />
         <objectAnimator
             android:propertyName="alpha"
