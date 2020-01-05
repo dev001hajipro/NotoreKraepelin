@@ -44,7 +44,6 @@ class SelectGameFragment : Fragment() {
                 requireContext(),
                 R.layout.dropdown_menu_popup_item,
                 arrayOf(
-                    getString(R.string.seconds_10),
                     getString(R.string.minutes_1),
                     getString(R.string.minutes_2),
                     getString(R.string.minutes_3),
