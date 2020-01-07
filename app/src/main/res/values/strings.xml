@@ -5,10 +5,10 @@
     <string name="nav_header_title">脳トレ・クレペリン</string>
     <string name="nav_header_subtitle">dev001hajipro@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">設定</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_tools">Tools</string>
+    <string name="menu_home">ホーム</string>
+    <string name="menu_tools">ツール</string>
 
     <string name="hint_seconds">ここをタップしてゲーム時間が選べます</string>
     <string name="app_title">脳トレ クレペリン</string>
@@ -43,9 +43,9 @@
     <string name="number_of_incorrect_answers">不正解数</string>
     <string name="start_test">テスト開始</string>
 
-    <string name="fragment_select_game"> </string>
-    <string name="fragment_game"> </string>
-    <string name="fragment_game_result">成績</string>
+    <string name="fragment_select_game">ゲーム選択</string>
+    <string name="fragment_game">クレペリン検査</string>
+    <string name="fragment_game_result">今回の成績</string>
 
     <string name="seconds_remaining">残り%d秒</string>
     <string name="others">その他</string>

@@ -32,7 +32,8 @@ class SelectGameFragment : Fragment() {
             false
         ).also {
             it.lifecycleOwner = this
-            it.viewModel = this.viewModel
+            it.viewModel = viewModel
+            viewModel.init()
         }
         return binding.root
     }

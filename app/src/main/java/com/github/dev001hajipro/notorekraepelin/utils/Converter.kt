@@ -26,4 +26,17 @@ object Converter {
         else -> context.getString(R.string.minutes_1)
     }
 
+    // XMLではJava形式で呼び出す必要がある。
+    // JvmStaticを使うと、Converter.gradeAlphabetで呼び出せる。
+    // 使わない場合は、Converter.INSTANCE.nameToTimeのように呼び出す。
+    @JvmStatic
+    fun gradeAlphabet(n: Float) = when {
+        // 平均60秒で55問解いたらA+判定
+        n > (55f / 60f) -> "A+"
+        n > (40f / 60f) -> "A"
+        n > (25f / 60f) -> "B"
+        n > (10f / 60f) -> "C"
+        n > (9f / 60f) -> "D"
+        else -> "E"
+    }
 }

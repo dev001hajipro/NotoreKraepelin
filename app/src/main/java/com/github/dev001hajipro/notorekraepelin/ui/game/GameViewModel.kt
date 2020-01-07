@@ -47,7 +47,21 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun sumMiss() = misses.sum()
 
-    fun grade() = ((scores.sum() + misses.sum()) / (secondsUntilFinished.value ?: 60)).toFloat()
+    // 評価=正解数/秒
+    fun grade(): Float {
+        Log.d(tag, "scores.sum()=" + (scores.sum()))
+        Log.d(
+            tag,
+            "(secondsUntilFinished.value ?: 60).toFloat()=${(secondsUntilFinished.value
+                ?: 60).toFloat()}"
+        )
+
+        Log.d(
+            tag,
+            "grade=" + (scores.sum().toFloat() / (secondsUntilFinished.value ?: 60).toFloat())
+        )
+        return (scores.sum().toFloat() / (secondsUntilFinished.value ?: 60).toFloat())
+    }
 
     // UI側から変更なし
     var lineCount = 0
