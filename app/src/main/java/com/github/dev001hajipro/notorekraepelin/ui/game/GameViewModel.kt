@@ -12,15 +12,17 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     val tag = GameViewModel::class.java.simpleName
 
+    private val countDownInterval = 1000L
     private val handler = Handler()
 
     // 残り時間 = 制限時間 - 経過時間
     val remainingSeconds = MutableLiveData(0)
     fun calcRemainingSeconds() {
-        remainingSeconds.value = maxSecond.value?.minus(elapsedSeconds.value ?: 0) ?: 0
+        remainingSeconds.value = secondsUntilFinished.value?.minus(elapsedSeconds.value ?: 0) ?: 0
     }
-    // UI側から変更なし
-    var maxSecond = MutableLiveData(0)
+
+    // 制限時間
+    var secondsUntilFinished = MutableLiveData(0)
     // UI側から変更なし
     // 経過時間
     var elapsedSeconds = MutableLiveData(0)
@@ -45,6 +47,22 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun sumMiss() = misses.sum()
 
+    // 評価=正解数/秒
+    fun grade(): Float {
+        Log.d(tag, "scores.sum()=" + (scores.sum()))
+        Log.d(
+            tag,
+            "(secondsUntilFinished.value ?: 60).toFloat()=${(secondsUntilFinished.value
+                ?: 60).toFloat()}"
+        )
+
+        Log.d(
+            tag,
+            "grade=" + (scores.sum().toFloat() / (secondsUntilFinished.value ?: 60).toFloat())
+        )
+        return (scores.sum().toFloat() / (secondsUntilFinished.value ?: 60).toFloat())
+    }
+
     // UI側から変更なし
     var lineCount = 0
 
@@ -61,10 +79,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                 lineCount++
             }
 
-            maxSecond.value?.let {
+            secondsUntilFinished.value?.let {
                 if ((elapsedSeconds.value ?: 0) < it) {
                     Log.d(tag, "before postDelayed delayMillis=1000, ${elapsedSeconds.value}")
-                    handler.postDelayed(this, 1000)
+                    handler.postDelayed(this, countDownInterval)
                 } else {
                     navigateToGameResultEvent.setValue(Any())
                 }
@@ -86,7 +104,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     fun onResume() {
         Log.d(tag, "before postDelayed delayMillis=1000, ${elapsedSeconds.value}")
-        handler.postDelayed(runnable, 1000) // start timer.
+        handler.postDelayed(runnable, countDownInterval) // start timer.
     }
 
     fun onPause() {

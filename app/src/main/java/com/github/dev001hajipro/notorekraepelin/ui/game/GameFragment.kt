@@ -40,7 +40,8 @@ class GameFragment : Fragment() {
             findNavController().navigate(
                 GameFragmentDirections.actionNavGameToNavGameResult(
                     viewModel.sumScore(),
-                    viewModel.sumMiss()
+                    viewModel.sumMiss(),
+                    viewModel.grade()
                 )
             )
         })
@@ -78,7 +79,7 @@ class GameFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.maxSecond.value = args.seconds
+        viewModel.secondsUntilFinished.value = args.seconds
         Log.d(this::class.java.simpleName, "args.seconds=${args.seconds}")
         viewModel.init()
     }

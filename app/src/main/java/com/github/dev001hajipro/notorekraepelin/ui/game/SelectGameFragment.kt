@@ -32,7 +32,8 @@ class SelectGameFragment : Fragment() {
             false
         ).also {
             it.lifecycleOwner = this
-            it.viewModel = this.viewModel
+            it.viewModel = viewModel
+            viewModel.init()
         }
         return binding.root
     }
@@ -44,7 +45,6 @@ class SelectGameFragment : Fragment() {
                 requireContext(),
                 R.layout.dropdown_menu_popup_item,
                 arrayOf(
-                    getString(R.string.seconds_10),
                     getString(R.string.minutes_1),
                     getString(R.string.minutes_2),
                     getString(R.string.minutes_3),

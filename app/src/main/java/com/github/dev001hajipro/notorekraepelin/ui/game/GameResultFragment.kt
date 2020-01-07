@@ -42,7 +42,6 @@ class GameResultFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.numberOfCorrectAnswers.value = args.correctAnswers
         viewModel.numberOfIncorrectAnswers.value = args.incorrectAnswers
+        viewModel.grade.value = args.grade
     }
-
-
 }
