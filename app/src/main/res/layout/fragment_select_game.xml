@@ -15,19 +15,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.game.SelectGameFragment">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/app_title"
-            android:textSize="36sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
@@ -40,29 +27,26 @@
             android:labelFor="@id/filled_exposed_dropdown"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title">
+            app:layout_constraintTop_toTopOf="parent">
 
             <AutoCompleteTextView
                 android:id="@+id/filled_exposed_dropdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={Converter.INSTANCE.timeToName(context, viewModel.seconds)}"
-                android:focusable="false"
                 android:cursorVisible="false"
-                />
+                android:focusable="false"
+                android:text="@={Converter.INSTANCE.timeToName(context, viewModel.seconds)}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/start_game"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/start_game"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
