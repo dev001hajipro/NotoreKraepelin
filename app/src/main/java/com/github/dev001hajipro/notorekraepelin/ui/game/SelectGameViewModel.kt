@@ -5,6 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 
 class SelectGameViewModel(application: Application) : AndroidViewModel(application) {
+
+    // Two-way binding
     var seconds = MutableLiveData(0)
 
     // TODO デフォルトを60秒にしているが以下の方法で実装する。

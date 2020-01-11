@@ -9,27 +9,37 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.math.exp
 
 @RunWith(AndroidJUnit4::class)
 class SelectGameViewModelTest {
 
     @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var viewModel: SelectGameViewModel
 
     @Before
     fun setupViewModel() {
+        // Given
         viewModel = SelectGameViewModel(ApplicationProvider.getApplicationContext())
     }
 
     @Test
-    fun callInit_SetSeconds() {
-        // When call init
+    fun initSeconds180_shouldSetSeconds() {
+        // When call init with arg
         viewModel.init(seconds = 180)
 
         // Then set seconds variable.
         assertThat(viewModel.seconds.value, `is`(180))
+    }
+
+    @Test
+    fun initNoArgs_shoudSetSecondsDefaultValue() {
+        viewModel.init()
+        // TODO delete magic number.
+        val expected = 60
+        assertThat(viewModel.seconds.value, `is`(expected))
     }
 
 }
