@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.github.dev001hajipro.notorekraepelin.R
 import com.github.dev001hajipro.notorekraepelin.databinding.FragmentGameResultBinding
 import kotlinx.android.synthetic.main.fragment_game_result.*
 
@@ -40,8 +39,6 @@ class GameResultFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.numberOfCorrectAnswers.value = args.correctAnswers
-        viewModel.numberOfIncorrectAnswers.value = args.incorrectAnswers
-        viewModel.grade.value = args.grade
+        viewModel.init(args.correctAnswers, args.incorrectAnswers, args.grade)
     }
 }
