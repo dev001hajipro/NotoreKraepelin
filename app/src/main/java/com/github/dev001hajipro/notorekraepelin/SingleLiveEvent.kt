@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 // https://github.com/android/architecture-samples/blob/dev-todo-mvvm-live/todoapp/app/src/main/java/com/example/android/architecture/blueprints/todoapp/SingleLiveEvent.java
 
+@Deprecated(message = "use Event.kt from blueprint.", replaceWith = ReplaceWith("Event<T>"))
 class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     private val tag = SingleLiveEvent::class.java.simpleName
