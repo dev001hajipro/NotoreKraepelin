@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.vectordrawable.graphics.drawable.AnimatorInflaterCompat
+import com.github.dev001hajipro.notorekraepelin.EventObserver
 import com.github.dev001hajipro.notorekraepelin.R
 import com.github.dev001hajipro.notorekraepelin.databinding.FragmentGameBinding
 import kotlinx.android.synthetic.main.fragment_game.*
@@ -36,7 +37,8 @@ class GameFragment : Fragment() {
             it.viewModel = this.viewModel
         }
 
-        viewModel.navigateToGameResultEvent.observe(this.viewLifecycleOwner, Observer {
+        // GameResultFragmentへの画面遷移
+        viewModel.navigateToGameResultEvent.observe(this.viewLifecycleOwner, EventObserver {
             findNavController().navigate(
                 GameFragmentDirections.actionNavGameToNavGameResult(
                     viewModel.sumScore(),
@@ -73,7 +75,6 @@ class GameFragment : Fragment() {
                 }.start()
             }
         })
-
         return binding.root
     }
 

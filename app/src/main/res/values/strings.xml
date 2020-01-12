@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">脳トレ クレペリン</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">脳トレ・クレペリン</string>
     <string name="nav_header_subtitle">dev001hajipro@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -11,9 +9,7 @@
     <string name="menu_tools">ツール</string>
 
     <string name="hint_seconds">ここをタップしてゲーム時間が選べます</string>
-    <string name="app_title">脳トレ クレペリン</string>
     <string name="start_game">ゲーム開始！</string>
-    <string name="communicate">コミュニケーション</string>
 
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -25,30 +21,22 @@
     <string name="seven">7</string>
     <string name="eight">8</string>
     <string name="nine">9</string>
-    <string name="underscore">_</string>
-    <string name="nbsp">\u00A0</string>
 
-    <string name="title">クレペる</string>
-    <string name="grades">成績</string>
     <string name="return_to_title">タイトルへ戻る</string>
-    <string name="once_more">もう一回</string>
     <string name="grades_label">判定</string>
     <string name="grades_a">A</string>
     <string name="grades_b">B</string>
     <string name="grades_c">C</string>
     <string name="grades_d">D</string>
     <string name="grades_a_plus">A+</string>
-    <string name="test_count">テスト回数</string>
     <string name="number_of_correct_answers">正解数</string>
     <string name="number_of_incorrect_answers">不正解数</string>
-    <string name="start_test">テスト開始</string>
 
     <string name="fragment_select_game">ゲーム選択</string>
     <string name="fragment_game">クレペリン検査</string>
     <string name="fragment_game_result">今回の成績</string>
 
     <string name="seconds_remaining">残り%d秒</string>
-    <string name="others">その他</string>
 
     <string name="minutes_1">1分</string>
     <string name="minutes_2">2分</string>

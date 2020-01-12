@@ -1,7 +1,5 @@
 package com.github.dev001hajipro.notorekraepelin
 
-// from com.example.android.architecture.blueprints.todoapp
-//
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer

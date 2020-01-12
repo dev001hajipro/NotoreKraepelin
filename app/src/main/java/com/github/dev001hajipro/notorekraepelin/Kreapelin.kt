@@ -8,7 +8,7 @@ package com.github.dev001hajipro.notorekraepelin
 5つの数字ごとに答えの1つが15以下になること
 */
 object Kraepelin {
-    fun lessThan10(ls: List<Int>): Boolean {
+    private fun lessThan10(ls: List<Int>): Boolean {
         for (i in 0 until ls.size - 1) {
             if (ls[i] + ls[i + 1] <= 10) {
                 return true
@@ -17,7 +17,7 @@ object Kraepelin {
         return false
     }
 
-    fun lessThan15(ls: List<Int>): Boolean {
+    private fun lessThan15(ls: List<Int>): Boolean {
         for (i in 0 until ls.size - 1) {
             if (ls[i] + ls[i + 1] <= 15) {
                 return true
@@ -45,7 +45,7 @@ object Kraepelin {
         return listOf(e1, e2)
     }
 
-    fun add(ls: List<Int>): List<Int> {
+    private fun add(ls: List<Int>): List<Int> {
         val e1 = ls.takeLast(2).first()
         val e2 = ls.takeLast(2).last()
 
