@@ -9,7 +9,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import kotlin.math.exp
 
 @RunWith(AndroidJUnit4::class)
 class SelectGameViewModelTest {
@@ -35,7 +34,7 @@ class SelectGameViewModelTest {
     }
 
     @Test
-    fun initNoArgs_shoudSetSecondsDefaultValue() {
+    fun initNoArgs_shouldSetSecondsDefaultValue() {
         viewModel.init()
         // TODO delete magic number.
         val expected = 60
