@@ -16,7 +16,7 @@ object Converter {
     }
 
     @InverseMethod(value = "nameToTime")
-    fun timeToName(context: Context, seconds: Int) = when (seconds) {
+    fun timeToName(context: Context, seconds: Int): String = when (seconds) {
         60 -> context.getString(R.string.minutes_1)
         120 -> context.getString(R.string.minutes_2)
         180 -> context.getString(R.string.minutes_3)
