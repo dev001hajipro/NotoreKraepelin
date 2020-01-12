@@ -6,14 +6,11 @@ import org.junit.Assert.*
 import org.hamcrest.core.Is.`is`
 import org.hamcrest.MatcherAssert.assertThat
 
-// method naming convention.
-// subjectUnderTest_actionOrInput_resultState
-
-
 class KraepelinTest {
 
     @Test
     fun lessThan10() {
+
     }
 
     @Test
@@ -27,7 +24,7 @@ class KraepelinTest {
     @Test
     fun newListWith2Elements_createList_returnListWithTwoElements() {
         val ls = Kraepelin.newListWith2Elements()
-        assertThat(ls.size, `is`(5))
+        assertThat(ls.size, `is`(2))
     }
 
     @Test

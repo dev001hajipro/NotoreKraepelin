@@ -10,7 +10,7 @@ import com.github.dev001hajipro.notorekraepelin.SingleLiveEvent
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
-    val tag = GameViewModel::class.java.simpleName
+    val tag: String = GameViewModel::class.java.simpleName
 
     private val countDownInterval = 1000L
     private val handler = Handler()
