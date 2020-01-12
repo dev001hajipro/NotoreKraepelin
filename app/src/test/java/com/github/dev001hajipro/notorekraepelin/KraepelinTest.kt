@@ -1,10 +1,8 @@
 package com.github.dev001hajipro.notorekraepelin
 
-import org.junit.Test
-
-import org.junit.Assert.*
-import org.hamcrest.core.Is.`is`
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.core.Is.`is`
+import org.junit.Test
 
 class KraepelinTest {
 

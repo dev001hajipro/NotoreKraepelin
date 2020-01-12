@@ -4,9 +4,10 @@ import android.app.Application
 import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.github.dev001hajipro.notorekraepelin.Event
 import com.github.dev001hajipro.notorekraepelin.Kraepelin
-import com.github.dev001hajipro.notorekraepelin.SingleLiveEvent
 
 class GameViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -17,6 +18,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     // 残り時間 = 制限時間 - 経過時間
     val remainingSeconds = MutableLiveData(0)
+
     fun calcRemainingSeconds() {
         remainingSeconds.value = secondsUntilFinished.value?.minus(elapsedSeconds.value ?: 0) ?: 0
     }
@@ -35,15 +37,15 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     var cursorIndex = 0
     // UI側から変更なし
-    var lines = MutableList(15) { Kraepelin.geneList115() }
+    private var lines = MutableList(15) { Kraepelin.geneList115() }
     // UI側から変更なし
     // 一行ごとの正解数
-    var scores = MutableList(15) { 0 }
+    private var scores = MutableList(15) { 0 }
 
     fun sumScore() = scores.sum()
 
     // 一行ごとの不正解数
-    var misses = MutableList(15) { 0 }
+    private var misses = MutableList(15) { 0 }
 
     fun sumMiss() = misses.sum()
 
@@ -66,7 +68,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     // UI側から変更なし
     var lineCount = 0
 
-    var navigateToGameResultEvent = SingleLiveEvent<Any>()
+    private val _navigateToGameResultEvent = MutableLiveData<Event<String>>()
+    val navigateToGameResultEvent: LiveData<Event<String>> = _navigateToGameResultEvent
 
     private val runnable = object : Runnable {
         override fun run() {
@@ -84,7 +87,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
                     Log.d(tag, "before postDelayed delayMillis=1000, ${elapsedSeconds.value}")
                     handler.postDelayed(this, countDownInterval)
                 } else {
-                    navigateToGameResultEvent.setValue(Any())
+                    _navigateToGameResultEvent.value = Event("")
                 }
             }
         }
