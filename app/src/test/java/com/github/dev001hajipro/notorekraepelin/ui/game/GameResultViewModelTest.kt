@@ -19,7 +19,7 @@ class GameResultViewModelTest {
     private lateinit var viewModel: GameResultViewModel
 
     @Before
-    fun setup() {
+    fun setUp() {
         // Given
         viewModel = GameResultViewModel(ApplicationProvider.getApplicationContext())
     }
