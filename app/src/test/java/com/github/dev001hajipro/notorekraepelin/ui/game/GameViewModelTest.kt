@@ -27,8 +27,15 @@ class GameViewModelTest {
     fun setInitValues_shouldGetDefaultValues() {
         // When
         viewModel.init()
-
         // Then
-        assertThat(viewModel.elapsedSeconds.value, `is`(0))
+        assertThat(viewModel.secondsUntilFinished.value, `is`(60))
+    }
+
+    @Test
+    fun setInit180_shouldGetSameValue() {
+        // When
+        viewModel.init(seconds = 180)
+        // Then
+        assertThat(viewModel.secondsUntilFinished.value, `is`(180))
     }
 }
