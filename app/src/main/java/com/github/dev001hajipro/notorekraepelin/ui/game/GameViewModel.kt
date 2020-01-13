@@ -38,7 +38,7 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     var cursorIndex = 0
     // UI側から変更なし
-    private var lines = MutableList(15) { Kraepelin.geneList115() }
+    private var lines = MutableList(15) { Kraepelin.generateTest() }
     // UI側から変更なし
     // 一行ごとの正解数
     private var scores = MutableList(15) { 0 }
