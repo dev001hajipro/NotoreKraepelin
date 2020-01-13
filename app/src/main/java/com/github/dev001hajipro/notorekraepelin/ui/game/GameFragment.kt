@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.fragment_game.*
  */
 class GameFragment : Fragment() {
 
+    private val _tag = GameFragment::class.java.simpleName
+
     private val args: GameFragmentArgs by navArgs()
 
     private val viewModel: GameViewModel by viewModels()
@@ -80,9 +82,8 @@ class GameFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.secondsUntilFinished.value = args.seconds
-        Log.d(this::class.java.simpleName, "args.seconds=${args.seconds}")
-        viewModel.init()
+        Log.d(_tag, "args.seconds=${args.seconds}")
+        viewModel.init(args.seconds)
     }
 
     override fun onResume() {

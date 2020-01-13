@@ -1,5 +1,6 @@
 package com.github.dev001hajipro.notorekraepelin
 
+// クレペリンは１行に１１５の数字があり、それを前半１５行、後半１５行足して作業量と曲線を見るもの
 /*
 1と2は足し算で出現しない
 「３　４　４」というように同じ数字は連続しない
@@ -26,10 +27,6 @@ object Kraepelin {
         return false
     }
 
-    /*
-    クレペリンは１行に１１５の数字があり、それを前半１５行、後半１５行足して作業量と曲線を見るものです。
-作業量が多ければ良いとお考えのようですが、量としては６０以上出来て
-     */
     fun geneList115(): List<Int> {
         var ls = newListWith2Elements()
         while (true) {
@@ -39,7 +36,7 @@ object Kraepelin {
         }
     }
 
-    fun newListWith2Elements(): List<Int> {
+    private fun newListWith2Elements(): List<Int> {
         val e1 = (3..9).random() // generate element1.
         val e2 = (3..9).filterNot { it == e1 }.random() // generate element2 ignore e1.
         return listOf(e1, e2)
@@ -53,12 +50,35 @@ object Kraepelin {
         return ls + e3
     }
 
-    fun add3(ls: List<Int>): List<Int> {
+    private fun add3(ls: List<Int>): List<Int> {
         while (true) {
             val ls5 = add(add(add(ls)))
             val lsHas5elem = ls5.takeLast(5)
             if (lessThan10(lsHas5elem) && lessThan15(lsHas5elem))
                 return ls5
+        }
+    }
+
+    private fun f5(): List<Int> {
+        val ls = newListWith2Elements()
+        return add3(ls)
+    }
+
+    private fun add5(ls: List<Int>): List<Int> {
+        while (true) {
+            val ls5 = add(add(add(add(add(ls)))))
+            val lsHas5elem = ls5.takeLast(5)
+            if (lessThan10(lsHas5elem) && lessThan15(lsHas5elem))
+                return ls5
+        }
+    }
+
+    fun generateTest(limit: Int = 115): List<Int> {
+        var ls = f5()
+        while (true) {
+            ls = add5(ls)
+            if (ls.size >= limit)
+                return ls.take(limit)
         }
     }
 }

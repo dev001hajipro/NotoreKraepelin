@@ -1,44 +1,33 @@
 package com.github.dev001hajipro.notorekraepelin
 
+import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.core.Is.`is`
 import org.junit.Test
 
 class KraepelinTest {
 
     @Test
-    fun lessThan10() {
+    fun generateTest_withArguments_shouldSameElementSize() {
+        // Given list size
+        val s = 115
 
-    }
-
-    @Test
-    fun lessThan15() {
-    }
-
-    @Test
-    fun geneList115() {
-    }
-
-    @Test
-    fun newListWith2Elements_createList_returnListWithTwoElements() {
-        val ls = Kraepelin.newListWith2Elements()
-        assertThat(ls.size, `is`(2))
-    }
-
-    @Test
-    fun add() {
-    }
-
-    @Test
-    fun add3_inputList_returnListAddedThreeElements() {
-        // Given
-        val ls = Kraepelin.newListWith2Elements()
-        assertThat(ls.size, `is`(2))
-
-        // When
-        val ls5 = Kraepelin.add3(ls)
+        // When generate test
+        val ls = Kraepelin.generateTest(s)
 
         // Then
-        assertThat(ls5.size, `is`(5))
+        assertThat(ls.size, `is`(115))
+    }
+
+    @Test
+    fun generateTest_withZeroValue_shouldReturnEmptyList() {
+        // Given list size
+        val s = 0
+
+        // When generate test
+        val ls = Kraepelin.generateTest(s)
+
+        // Then
+        assertThat(ls, `is`(notNullValue()))
+        assertThat(ls.size, `is`(0))
     }
 }
