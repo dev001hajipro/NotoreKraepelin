@@ -83,7 +83,7 @@ class GameFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         Log.d(_tag, "args.seconds=${args.seconds}")
-        viewModel.init(args.seconds)
+        viewModel.init(args.seconds * 1000L)
     }
 
     override fun onResume() {

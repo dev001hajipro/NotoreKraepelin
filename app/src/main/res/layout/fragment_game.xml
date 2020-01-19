@@ -2,6 +2,7 @@
 <layout>
     <data>
 
+        <import type="com.github.dev001hajipro.notorekraepelin.utils.Converter" />
         <variable
             name="viewModel"
             type="com.github.dev001hajipro.notorekraepelin.ui.game.GameViewModel" />
@@ -239,7 +240,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@{@string/seconds_remaining(viewModel.remainingSeconds)}"
+            android:text="@{Converter.millisToString(viewModel.millisUntilFinishedForResume)}"
             android:textAlignment="center"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"

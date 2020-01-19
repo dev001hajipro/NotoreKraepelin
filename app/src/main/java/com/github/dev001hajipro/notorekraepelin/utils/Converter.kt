@@ -3,6 +3,8 @@ package com.github.dev001hajipro.notorekraepelin.utils
 import android.content.Context
 import androidx.databinding.InverseMethod
 import com.github.dev001hajipro.notorekraepelin.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 object Converter {
     fun nameToTime(context: Context, name: String) = when (name) {
@@ -39,4 +41,7 @@ object Converter {
         n > (9f / 60f) -> "D"
         else -> "E"
     }
+
+    @JvmStatic
+    fun millisToString(n: Long): String = SimpleDateFormat("mm:ss.S", Locale.US).format(n)
 }
