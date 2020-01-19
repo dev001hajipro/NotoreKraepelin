@@ -1,12 +1,11 @@
 package com.github.dev001hajipro.notorekraepelin.ui.game
 
 import android.app.Application
-import android.os.Handler
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.github.dev001hajipro.notorekraepelin.Event
 import com.github.dev001hajipro.notorekraepelin.Kraepelin
 
@@ -14,21 +13,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     private val tag: String = GameViewModel::class.java.simpleName
 
-    private val countDownInterval = 1000L
-    private val handler = Handler()
-
-    // 制限時間
-    private val _secondsUntilFinished = MutableLiveData(0)
-    val secondsUntilFinished: LiveData<Int> = _secondsUntilFinished
-
-    // 経過時間
-    private val _elapsedSeconds = MutableLiveData(0)
-    val elapsedSeconds: LiveData<Int> = _elapsedSeconds
-
-    // 残り時間 = 制限時間 - 経過時間
-    val remainingSeconds = Transformations.map(elapsedSeconds) { n ->
-        _secondsUntilFinished.value?.minus(n)
-    }
+    // タイマーℤ
+    private lateinit var timer: CountDownTimer
+    private val _millisUntilFinishedForResume = MutableLiveData<Long>(0L)
+    var millisUntilFinishedForResume = _millisUntilFinishedForResume
 
     var q1 = MutableLiveData(0)
     var q2 = MutableLiveData(0)
@@ -52,7 +40,8 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     // 評価=正解数/秒
     fun grade(): Float {
-        return (scores.sum().toFloat() / (secondsUntilFinished.value ?: 60).toFloat())
+        return (scores.sum().toFloat() / ((millisUntilFinishedForResume.value
+            ?: 60000) / 1000L).toFloat())
     }
 
     private var lineCount = 0
@@ -60,32 +49,25 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val _navigateToGameResultEvent = MutableLiveData<Event<String>>()
     val navigateToGameResultEvent: LiveData<Event<String>> = _navigateToGameResultEvent
 
-    private val runnable = object : Runnable {
-        override fun run() {
-            _elapsedSeconds.value = (_elapsedSeconds.value ?: 0) + 1
-            val v = _elapsedSeconds.value ?: 0
-
-            if (v % 60 == 0) { // イベント
-                cursorIndex = 0
-                lineCount++
+    private fun timer(millisInFuture: Long, countDownInterval: Long = 100L): CountDownTimer {
+        return object : CountDownTimer(millisInFuture, countDownInterval) {
+            override fun onFinish() {
+                _navigateToGameResultEvent.value = Event("")
             }
 
-            secondsUntilFinished.value?.let {
-                if ((elapsedSeconds.value ?: 0) < it) {
-                    Log.d(tag, "before postDelayed delayMillis=1000, ${_elapsedSeconds.value}")
-                    handler.postDelayed(this, countDownInterval)
-                } else {
-                    _navigateToGameResultEvent.value = Event("")
+            override fun onTick(millisUntilFinished: Long) {
+                millisUntilFinishedForResume.value = millisUntilFinished
+                if ((((millisInFuture - millisUntilFinished) / 1000L) % 60) == 0L) { // イベント
+                    cursorIndex = 0
+                    lineCount++
                 }
             }
         }
     }
 
-    fun init(seconds: Int = 60) {
+    fun init(milliseconds: Long = 60000) {
         Log.d(tag, "init")
-
-        _secondsUntilFinished.value = seconds
-        _elapsedSeconds.value = 0
+        millisUntilFinishedForResume.value = milliseconds
 
         lineCount = 0
         cursorIndex = 0
@@ -95,12 +77,12 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun onResume() {
-        Log.d(tag, "before postDelayed delayMillis=1000, ${_elapsedSeconds.value}")
-        handler.postDelayed(runnable, countDownInterval) // start timer.
+        timer = timer(millisUntilFinishedForResume.value ?: 0)
+        timer.start()
     }
 
     fun onPause() {
-        handler.removeCallbacks(runnable)
+        timer.cancel()
     }
 
     // TODO クリアボタンで、１つ前の問題に戻る対応。
