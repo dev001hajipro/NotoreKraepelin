@@ -29,15 +29,19 @@ class GameViewModelTest {
         // When
         viewModel.init()
         // Then
-        assertThat(viewModel.millisUntilFinishedForResume.getOrAwaitValue(), `is`(60000L))
+        assertThat(viewModel.millisecondsUntilFinished.value, `is`(60_000L))
+        assertThat(viewModel.elapsedMilliSeconds.value, `is`(0L))
+        assertThat(viewModel.remainingMilliseconds.getOrAwaitValue(), `is`(60_000L))
     }
 
     @Test
     fun setInit180_shouldGetSameValue() {
         // When
-        viewModel.init(milliseconds = 180000L)
+        viewModel.init(milliseconds = 180_000L)
         // Then
-        assertThat(viewModel.millisUntilFinishedForResume.getOrAwaitValue(), `is`(180000L))
+        assertThat(viewModel.millisecondsUntilFinished.value, `is`(180_000L))
+        assertThat(viewModel.elapsedMilliSeconds.value, `is`(0L))
+        assertThat(viewModel.remainingMilliseconds.getOrAwaitValue(), `is`(180_000L))
     }
 
     @Test
