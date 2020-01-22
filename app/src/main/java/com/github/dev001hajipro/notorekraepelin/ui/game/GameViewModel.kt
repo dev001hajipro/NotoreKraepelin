@@ -1,7 +1,6 @@
 package com.github.dev001hajipro.notorekraepelin.ui.game
 
 import android.app.Application
-import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
