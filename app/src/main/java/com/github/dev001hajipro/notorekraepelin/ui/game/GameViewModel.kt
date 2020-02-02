@@ -30,12 +30,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         millisecondsUntilFinished.value?.minus(n)
     }
 
-    // タイマーℤ
-    //private lateinit var timer: CountDownTimer
-    // レジューム対応残り時間
-    //private val _millisUntilFinishedForResume = MutableLiveData<Long>(0L)
-    //var millisUntilFinishedForResume = _millisUntilFinishedForResume
-
     var q1 = MutableLiveData(0)
     var q2 = MutableLiveData(0)
     var a1 = MutableLiveData(0)
@@ -61,7 +55,6 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     // 評価=正解数/秒
     fun grade(): Float {
-        //return (scores.sum().toFloat() / ((millisUntilFinishedForResume.value ?: 60000) / 1000L).toFloat())
         return (scores.sum().toFloat() / ((_millisecondsUntilFinished.value
             ?: 60000) / 1000L).toFloat())
     }
@@ -69,38 +62,13 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     private val _navigateToGameResultEvent = MutableLiveData<Event<String>>()
     val navigateToGameResultEvent: LiveData<Event<String>> = _navigateToGameResultEvent
 
-    /*
-    private fun timer(millisInFuture: Long, countDownInterval: Long = 100L): CountDownTimer {
-        return object : CountDownTimer(millisInFuture, countDownInterval) {
-            override fun onFinish() {
-                _navigateToGameResultEvent.value = Event("")
-            }
-
-            override fun onTick(millisUntilFinished: Long) {
-                millisUntilFinishedForResume.value = millisUntilFinished
-                Log.d(
-                    tag,
-                    "onTick: millisUntilFinishedForResume.value=${millisUntilFinishedForResume.value}, millisInFuture=$millisInFuture, (millisInFuture - millisUntilFinished)=${(millisInFuture - millisUntilFinished)}"
-                )
-                // 1分単位(60000ミリ秒)で行が変わる。
-                // つまり、1分単位で条件が変わるとよい
-                // 経過時間(ミリ秒) > 1分単位(60000ミリ秒) * n ならn++
-                if (((millisUntilFinished) % (60000L * (lineCount + 1))) == 0L) { // イベント
-                    cursorIndex = 0
-                    lineCount++
-                    Log.d(tag, "onTick: cursorIndex=$cursorIndex, lineCount=$lineCount")
-                }
-            }
-        }
-    }
-     */
-
     private val runnable = object : Runnable {
         override fun run() {
             _elapsedMilliSeconds.value = (_elapsedMilliSeconds.value ?: 0) + 1000L
             val v = _elapsedMilliSeconds.value ?: 0
 
             if (v % 60000L == 0L) { // イベント
+                Log.d(tag, "cursorIndex=$cursorIndex, lineCount=$lineCount")
                 cursorIndex = 0
                 lineCount++
             }
@@ -116,11 +84,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun init(milliseconds: Long = 60000) {
+    fun init(milliseconds: Long = 60000L) {
         Log.d(tag, "init")
         _elapsedMilliSeconds.value = 0
         _millisecondsUntilFinished.value = milliseconds
-        //millisUntilFinishedForResume.value = milliseconds
 
         lineCount = 0
         cursorIndex = 0
@@ -130,13 +97,10 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun onResume() {
-        //timer = timer(millisUntilFinishedForResume.value ?: 0)
-        //timer.start()
         handler.postDelayed(runnable, countDownInterval)
     }
 
     fun onPause() {
-        //timer.cancel()
         handler.removeCallbacks(runnable)
     }
 
